@@ -5,7 +5,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "incremental": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "noEmit": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true

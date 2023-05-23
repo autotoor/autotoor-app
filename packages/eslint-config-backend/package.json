@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "@autotoor/eslint-config",
+  "name": "@autotoor/eslint-config-backend",
   "version": "1.0.0",
-  "description": "eslint configuration for React Native",
+  "description": "eslint configuration for backend services",
   "author": "Alex Levine",
   "license": "MIT",
   "main": "index.js",
@@ -16,11 +16,12 @@
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
     "eslint": "^8.41.0",
-    "eslint-config-universe": "^11.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8"
-  },
-  "eslintConfig": {
-    "extends": "."
   }
 }

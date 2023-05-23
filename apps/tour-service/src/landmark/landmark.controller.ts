@@ -1,6 +1,8 @@
+import * as console from 'console';
+
 import { LocalLandmark } from '@autotoor/tour-common';
 import { Controller, Get, Query } from '@nestjs/common';
-import * as console from 'console';
+
 import { LocalLandmarkSearchCriteriaDto } from './dto/local-landmark-search-criteria.dto';
 
 @Controller('/landmark')
