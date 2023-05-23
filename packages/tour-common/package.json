@@ -18,6 +18,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@autotoor/eslint-config-backend": "*",
     "@autotoor/tsconfig": "*",
     "typescript": "^4.7.4"
   }

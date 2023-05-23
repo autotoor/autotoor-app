@@ -1,4 +1,5 @@
-import { DistanceUnit, Coordinates } from "../common";
+import { DistanceUnit, Coordinates } from '../common';
+
 export interface Landmark {
   /**
    * The title of the landmark.
@@ -39,7 +40,6 @@ export interface LocalLandmark {
  * Criteria for searching landmarks.
  */
 export interface LocalLandmarkSearchCriteria extends Coordinates {
-
   /**
    * The maximum number of results
    */

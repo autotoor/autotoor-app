@@ -66,6 +66,8 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-shadow': ['error'],
+        'no-shadow': 0,
         'import/extensions': ['error', 'never', { ignorePackages: true }],
         'import/order': [
             'error',

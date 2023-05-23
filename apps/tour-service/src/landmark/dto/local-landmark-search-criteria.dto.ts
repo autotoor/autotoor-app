@@ -3,8 +3,8 @@ import {
   DistanceUnit,
   LocalLandmarkSearchCriteria,
 } from '@autotoor/tour-common';
-// import { Transform } from 'class-transformer';
 import { IsEnum, IsInt, IsOptional } from 'class-validator';
+
 import { CoordinatesDto } from './coordinates.dto';
 
 export class LocalLandmarkSearchCriteriaDto
