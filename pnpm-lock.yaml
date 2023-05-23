@@ -5,15 +5,15 @@ importers:
   .:
     devDependencies:
       turbo:
-        specifier: ^1.5.4
-        version: 1.5.4
+        specifier: ^1.9.8
+        version: 1.9.8
       typescript:
         specifier: ^4.8.3
         version: 4.8.3
 
   apps/mobile:
     dependencies:
-      '@acme/feature-home':
+      '@autotoor/feature-home':
         specifier: '*'
         version: link:../../packages/feature-home
       expo:
@@ -41,7 +41,7 @@ importers:
         specifier: ~0.18.12
         version: 0.18.12(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
-      '@acme/eslint-config':
+      '@autotoor/eslint-config':
         specifier: '*'
         version: link:../../packages/eslint-config
       '@babel/core':
@@ -62,6 +62,9 @@ importers:
 
   apps/tour-service:
     dependencies:
+      '@autotoor/tour-common':
+        specifier: '*'
+        version: link:../../packages/tour-common
       '@nestjs/axios':
         specifier: ^2.0.0
         version: 2.0.0(@nestjs/common@9.0.0)(axios@1.4.0)(reflect-metadata@0.1.13)(rxjs@7.2.0)
@@ -99,6 +102,9 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
     devDependencies:
+      '@autotoor/tsconfig':
+        specifier: '*'
+        version: link:../../packages/tsconfig
       '@nestjs/cli':
         specifier: ^9.0.0
         version: 9.0.0
@@ -168,7 +174,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@acme/feature-home':
+      '@autotoor/feature-home':
         specifier: '*'
         version: link:../../packages/feature-home
       next:
@@ -184,7 +190,7 @@ importers:
         specifier: ~0.18.12
         version: 0.18.12(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
-      '@acme/eslint-config':
+      '@autotoor/eslint-config':
         specifier: '*'
         version: link:../../packages/eslint-config
       babel-plugin-react-native-web:
@@ -217,14 +223,14 @@ importers:
 
   packages/feature-home:
     dependencies:
-      '@acme/ui':
+      '@autotoor/ui':
         specifier: '*'
         version: link:../ui
       react-native-web:
         specifier: '*'
         version: 0.18.12(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
-      '@acme/eslint-config':
+      '@autotoor/eslint-config':
         specifier: '*'
         version: link:../eslint-config
       '@testing-library/react-native':
@@ -264,13 +270,24 @@ importers:
         specifier: ^6.5.0
         version: 6.5.0(typescript@4.8.3)
 
+  packages/tour-common:
+    devDependencies:
+      '@autotoor/tsconfig':
+        specifier: '*'
+        version: link:../tsconfig
+      typescript:
+        specifier: ^4.7.4
+        version: 4.8.3
+
+  packages/tsconfig: {}
+
   packages/ui:
     dependencies:
       react-native-web:
         specifier: '*'
         version: 0.18.12(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
-      '@acme/eslint-config':
+      '@autotoor/eslint-config':
         specifier: '*'
         version: link:../eslint-config
       '@testing-library/react-native':
@@ -13118,65 +13135,65 @@ packages:
       typescript: 5.0.2
     dev: true
 
-  /turbo-darwin-64@1.5.4:
-    resolution: {integrity: sha512-Bdxnwf+m0bnRb5HsVZLe+GRer+MOUgLNjOxluwD7POETgH8CTWu99DXfIMAVDWNILVmPCZbWv8Qh2XwhmPlBqw==}
+  /turbo-darwin-64@1.9.8:
+    resolution: {integrity: sha512-PkTdBjPfgpj/Dob/6SjkzP0BBP80/KmFjLEocXVEECCLJE6tHKbWLRdvc79B0N6SufdYdZ1uvvoU3KPtBokSPw==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64@1.5.4:
-    resolution: {integrity: sha512-1Jdv6bl0v9TITEYDxwNFXdWMlYOifWdnrzkTDyaUV/IM0iL1oGiuD4ZdM9VfbR1D7y573dCmVPvbzgV3GQbJZA==}
+  /turbo-darwin-arm64@1.9.8:
+    resolution: {integrity: sha512-sLwqOx3XV57QCEoJM9GnDDnnqidG8wf29ytxssBaWHBdeJTjupyrmzTUrX+tyKo3Q+CjWvbPLyqVqxT4g5NuXQ==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64@1.5.4:
-    resolution: {integrity: sha512-FbsXHOIkFnjX4Qu7ZtoCimmy5GlnTYuy66TO2re3i+jy+a59XOAnhU8tT/+FcA73oDAnSv/SAbz1gbsknCU4PA==}
+  /turbo-linux-64@1.9.8:
+    resolution: {integrity: sha512-AMg6VT6sW7aOD1uOs5suxglXfTYz9T0uVyKGKokDweGOYTWmuTMGU5afUT1tYRUwQ+kVPJI+83Atl5Ob0oBsgw==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64@1.5.4:
-    resolution: {integrity: sha512-dYX2ekvYsHGSEsLI+NdoYskr1IEmUES+rup3vc9fFziYX+qOoQuttB7VYA9z6+E4fPpLCxAShPwzxmaXhplCNg==}
+  /turbo-linux-arm64@1.9.8:
+    resolution: {integrity: sha512-tLnxFv+OIklwTjiOZ8XMeEeRDAf150Ry4BCivNwgTVFAqQGEqkFP6KGBy56hb5RRF1frPQpoPGipJNVm7c8m1w==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64@1.5.4:
-    resolution: {integrity: sha512-xMmmfplaPrN2Bac+tmOo7bncKhcjv2a/6UGXobNspWzwf6dEboHtxbsP0kIfqoi/22gyj66jg/K/gFJgX08pnw==}
+  /turbo-windows-64@1.9.8:
+    resolution: {integrity: sha512-r3pCjvXTMR7kq2E3iqwFlN1R7pFO/TOsuUjMhOSPP7HwuuUIinAckU4I9foM3q7ZCQd1XXScBUt3niDyHijAqQ==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64@1.5.4:
-    resolution: {integrity: sha512-6/DfBdUK+FrbRavQQY9XnxW+1SHPMsuooVjrW8nSh9KFXxTccbFvslUO38usl/lZ0EMKu7MC8D7Vf/zQ9pYGyw==}
+  /turbo-windows-arm64@1.9.8:
+    resolution: {integrity: sha512-CWzRbX2TM5IfHBC6uWM659qUOEDC4h0nn16ocG8yIq1IF3uZMzKRBHgGOT5m1BHom+R08V0NcjTmPRoqpiI0dg==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo@1.5.4:
-    resolution: {integrity: sha512-8txVfU6J4H5ZkSxr6N6Qn7H+W2Cpr0Uh67VeCH4/ZIbH4u24qPFZA9emlGcss0tI1pZHKGJ0+KjoSzC7vWqN2g==}
+  /turbo@1.9.8:
+    resolution: {integrity: sha512-dTouGZBm4a2fE0OPafcTQERCp4i3ZOow0Pr0JlOyxKmzJy0JRwXypH013kbZoK6k1ET5tS/g9rwUXIM/AmWXXQ==}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      turbo-darwin-64: 1.5.4
-      turbo-darwin-arm64: 1.5.4
-      turbo-linux-64: 1.5.4
-      turbo-linux-arm64: 1.5.4
-      turbo-windows-64: 1.5.4
-      turbo-windows-arm64: 1.5.4
+      turbo-darwin-64: 1.9.8
+      turbo-darwin-arm64: 1.9.8
+      turbo-linux-64: 1.9.8
+      turbo-linux-arm64: 1.9.8
+      turbo-windows-64: 1.9.8
+      turbo-windows-arm64: 1.9.8
     dev: true
 
   /type-check@0.3.2:

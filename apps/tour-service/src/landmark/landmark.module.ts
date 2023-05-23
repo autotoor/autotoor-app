@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { LandmarkController } from './landmark.controller';
 
 @Module({
-  controllers: [],
+  controllers: [LandmarkController],
   providers: [],
 })
 export class LandmarkModule {}

@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "@acme/ui",
+  "name": "@autotoor/ui",
   "version": "1.0.0",
-  "description": "Acme UI components for React Native",
-  "author": "Cedric van Putten <me@bycedric.com>",
+  "description": "Autotoor UI components for React Native",
+  "author": "Alex Levine",
   "license": "MIT",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -19,7 +19,7 @@
     "build": "tsup --clean"
   },
   "devDependencies": {
-    "@acme/eslint-config": "*",
+    "@autotoor/eslint-config": "*",
     "@testing-library/react-native": "^11.4.0",
     "@tsconfig/recommended": "^1.0.1",
     "@types/jest": "^26.0.24",
@@ -47,7 +47,7 @@
     }
   },
   "eslintConfig": {
-    "extends": "@acme/eslint-config",
+    "extends": "@autotoor/eslint-config",
     "ignorePatterns": [
       "node_modules",
       "build"

@@ -16,6 +16,9 @@
         "node_modules/.cache/metro/**"
       ]
     },
+    "clean": {
+      "cache": false
+    },
     "dev": {
       "cache": false,
       "persistent": true

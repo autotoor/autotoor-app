@@ -2,17 +2,20 @@
   "private": true,
   "name": "@acme/monorepo",
   "scripts": {
+    "clean": "turbo run clean && rm -rf node_modules",
     "dev": "turbo dev",
     "dev:mobile": "turbo dev --filter=\"{./apps/mobile}...\"",
+    "dev:tour": "turbo dev --filter=\"{./apps/tour-service}...\"",
     "dev:web": "turbo dev --filter=\"{./apps/web}...\"",
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build",
     "build:mobile": "turbo build --filter=\"...{./apps/mobile}\"",
+    "build:tour": "turbo build --filter=\"...{./apps/tour}\"",
     "build:web": "turbo build --filter=\"...{./apps/web}\""
   },
   "devDependencies": {
-    "turbo": "^1.5.4",
+    "turbo": "^1.9.8",
     "typescript": "^4.8.3"
   },
   "pnpm": {

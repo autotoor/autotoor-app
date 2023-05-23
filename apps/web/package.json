@@ -1,5 +1,5 @@
 {
-  "name": "@acme/app-web",
+  "name": "@autotoor/app-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,21 +9,21 @@
     "start": "next start"
   },
   "dependencies": {
-    "@acme/feature-home": "*",
+    "@autotoor/feature-home": "*",
     "next": "^13.2.1",
     "react": "~18.2.0",
     "react-dom": "~18.2.0",
     "react-native-web": "~0.18.12"
   },
   "devDependencies": {
-    "@acme/eslint-config": "*",
+    "@autotoor/eslint-config": "*",
     "babel-plugin-react-native-web": "^0.18.12",
     "eslint": "^8.34.0",
     "eslint-config-next": "^13.2.1"
   },
   "eslintConfig": {
     "extends": [
-      "@acme/eslint-config",
+      "@autotoor/eslint-config",
       "next"
     ],
     "ignorePatterns": [

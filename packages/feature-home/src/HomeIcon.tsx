@@ -1,4 +1,4 @@
-import { Paragraph } from '@acme/ui';
+import { Paragraph } from '@autotoor/ui';
 import { ComponentProps } from 'react';
 
 type HomeIconProps = ComponentProps<typeof Paragraph>;

@@ -1,4 +1,5 @@
 {
+  "extends": "@autotoor/tsconfig/base",
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,

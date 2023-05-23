@@ -1,4 +1,4 @@
-import { HomeScreen, HomeIcon } from '@acme/feature-home';
+import { HomeScreen, HomeIcon } from '@autotoor/feature-home';
 import Head from 'next/head';
 
 import styles from '../styles/Home.module.css';

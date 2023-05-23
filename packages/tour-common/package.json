@@ -1,0 +1,24 @@
+{
+  "name": "@autotoor/tour-common",
+  "version": "1.0.0",
+  "description": "",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "type-check": "tsc",
+    "lint": "NODE_OPTIONS=\"--max-old-space-size=5120\" eslint --ext .ts,.tsx src",
+    "build": "tsc -b",
+    "clean": "rm -rf dist",
+    "test": "NODE_ENV=test jest --passWithNoTests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@autotoor/tsconfig": "*",
+    "typescript": "^4.7.4"
+  }
+}

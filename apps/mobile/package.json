@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@acme/app-mobile",
+  "name": "@autotoor/app-mobile",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "eas-build-post-install": "pnpm run -w build:mobile"
   },
   "dependencies": {
-    "@acme/feature-home": "*",
+    "@autotoor/feature-home": "*",
     "expo": "^48.0.4",
     "expo-dev-client": "~2.1.2",
     "expo-status-bar": "~1.4.4",
@@ -26,7 +26,7 @@
     "react-native-web": "~0.18.12"
   },
   "devDependencies": {
-    "@acme/eslint-config": "*",
+    "@autotoor/eslint-config": "*",
     "@babel/core": "^7.19.3",
     "@types/react": "~18.0.28",
     "@types/react-dom": "~18.0.11",
@@ -34,7 +34,7 @@
     "babel-preset-expo": "~9.3.0"
   },
   "eslintConfig": {
-    "extends": "@acme/eslint-config",
+    "extends": "@autotoor/eslint-config",
     "ignorePatterns": [
       "node_modules",
       "build",
