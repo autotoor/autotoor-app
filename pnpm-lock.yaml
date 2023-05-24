@@ -294,9 +294,6 @@ importers:
       babel-preset-expo:
         specifier: ~9.2.1
         version: 9.2.2
-      eslint-plugin-prettier:
-        specifier: ^4.2.1
-        version: 4.2.1(eslint-config-prettier@8.8.0)(eslint@8.34.0)(prettier@2.8.8)
       jest:
         specifier: ^29.4.3
         version: 29.4.3
@@ -6324,6 +6321,7 @@ packages:
       eslint: '>=7.0.0'
     dependencies:
       eslint: 8.34.0
+    dev: false
 
   /eslint-config-universe@11.2.0(eslint@8.34.0)(prettier@2.8.8)(typescript@4.8.3):
     resolution: {integrity: sha512-exyQ2DozdDjq+FmIFmo0l3LDVBIn9l8/hJn6EP/EYKGutj0Wr7MvDLp1nVLP07Wk9ykD0Hi2s8g+TP4SW5cOmQ==}
@@ -6603,6 +6601,7 @@ packages:
       eslint-config-prettier: 8.8.0(eslint@8.34.0)
       prettier: 2.8.8
       prettier-linter-helpers: 1.0.0
+    dev: false
 
   /eslint-plugin-react-hooks@4.6.0(eslint@8.34.0):
     resolution: {integrity: sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==}
@@ -10642,6 +10641,7 @@ packages:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+    dev: false
 
   /pretty-bytes@5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
