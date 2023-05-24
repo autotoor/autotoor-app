@@ -19,9 +19,9 @@ When developing or deploying a single app, you might not need the development se
 This monorepo uses a simple npm script convention of `dev:<app-name>` and `build:<app-name>` to keep this process simple. Under the hood, it uses [Turborepo's workspace filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering), defined as an npm script in the root [**package.json**](./package.json).
 
 - `$ pnpm dev:mobile` - Build and watch **app/mobile** and all **packages** used in mobile, for development.
-- `$ pnpm dev:web` - Build and watch **app/web** and all **packages** used in web, for development.
+- `$ pnpm dev:tour` - Build and watch **app/tour-service** and all **packages** used in tour-service, for development.
 - `$ pnpm build:mobile` - Build **apps/mobile** and all **packages** used in mobile, for production deployments
-- `$ pnpm build:web` - Build **apps/web** and all **packages** used in web, for production deployments
+- `$ pnpm build:tour` - Build **apps/tour-service** and all **packages** used in tour-service, for production deployments
 
 ### Switching to yarn or npm
 
@@ -40,12 +40,13 @@ You can use yarn or npm with this monorepo as well. If you want to use one of th
 ### Apps
 
 - [`apps/mobile`](./apps/mobile) - Expo app using `eslint-config` and `feature-home` packages.
-- [`apps/web`](./apps/web) - Next.js app using `eslint-config` and `feature-home` packages.
+- [`apps/tour-service`](./apps/tour-service) - NestJS app using `eslint-config-backend` and `tour-common` packages.
 
 ### Packages
 
-- [`packages/eslint-config`](./packages/eslint-config) - Preconfigured ESLint configuration for each app or package.
-- [`packages/feature-home`](./packages/feature-home) - Shared React Native domain-logic for apps, using both `ui` and `eslint-config` packages.
+- [`packages/eslint-config`](./packages/eslint-config) - Preconfigured ESLint configuration geared towards frontend for apps or packages.
+- [`packages/eslint-config-backend`](./packages/eslint-config-backend) - Preconfigured ESLint configuration geared towards nestJS for each app or package.
+- [`packages/tour-common`](./packages/tour-common) - Shared tour types for both FE and BE. Uses the `eslint-config-backend` package
 - [`packages/ui`](./packages/ui) - Shared React Native UI components for apps, using the `eslint-config` package.
 
 ## 👷 Workflows

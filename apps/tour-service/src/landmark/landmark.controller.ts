@@ -1,5 +1,3 @@
-import * as console from 'console';
-
 import { LocalLandmark } from '@autotoor/tour-common';
 import { Controller, Get, Query } from '@nestjs/common';
 
@@ -9,9 +7,8 @@ import { LocalLandmarkSearchCriteriaDto } from './dto/local-landmark-search-crit
 export class LandmarkController {
   @Get('/local')
   public async getLocalLandmarks(
-    @Query() criteria: LocalLandmarkSearchCriteriaDto,
+    @Query() _criteria: LocalLandmarkSearchCriteriaDto,
   ): Promise<LocalLandmark[]> {
-    console.log('Get Local Landmarks', criteria);
     return [];
   }
 }
