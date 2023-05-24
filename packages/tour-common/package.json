@@ -1,12 +1,12 @@
 {
   "name": "@autotoor/tour-common",
   "version": "1.0.0",
-  "description": "",
+  "description": "Common Tour Types",
   "files": [
-    "dist"
+    "build"
   ],
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
   "scripts": {
     "type-check": "tsc",
     "lint": "NODE_OPTIONS=\"--max-old-space-size=5120\" eslint --ext .ts,.tsx src",

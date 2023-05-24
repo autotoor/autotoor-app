@@ -37,6 +37,9 @@ importers:
       react-native:
         specifier: 0.71.3
         version: 0.71.3(@babel/core@7.20.2)(react@18.2.0)
+      react-native-get-random-values:
+        specifier: ^1.9.0
+        version: 1.9.0(react-native@0.71.3)
       react-native-web:
         specifier: ~0.18.12
         version: 0.18.12(react-dom@18.2.0)(react@18.2.0)
@@ -228,7 +231,7 @@ importers:
         version: 2.27.5(@typescript-eslint/parser@5.42.1)(eslint@8.34.0)
       eslint-plugin-prettier:
         specifier: ^4.2.1
-        version: 4.2.1(eslint-config-prettier@8.5.0)(eslint@8.34.0)(prettier@2.8.8)
+        version: 4.2.1(eslint-config-prettier@8.8.0)(eslint@8.34.0)(prettier@2.8.8)
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
@@ -356,9 +359,6 @@ importers:
       babel-preset-expo:
         specifier: ~9.2.1
         version: 9.2.2
-      eslint-plugin-prettier:
-        specifier: ^4.2.1
-        version: 4.2.1(eslint-config-prettier@8.5.0)(eslint@8.34.0)(prettier@2.8.8)
       jest:
         specifier: ^29.4.3
         version: 29.4.3
@@ -7030,6 +7030,7 @@ packages:
       eslint-config-prettier: 8.5.0(eslint@8.34.0)
       prettier: 2.8.8
       prettier-linter-helpers: 1.0.0
+    dev: false
 
   /eslint-plugin-prettier@4.2.1(eslint-config-prettier@8.8.0)(eslint@8.34.0)(prettier@2.8.8):
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
@@ -7619,6 +7620,10 @@ packages:
       to-regex: 3.0.2
     transitivePeerDependencies:
       - supports-color
+
+  /fast-base64-decode@1.0.0:
+    resolution: {integrity: sha512-qwaScUgUGBYeDNRnbc/KyllVU88Jk1pRHPStuF/lO7B0/RTRLj7U0lkdTAutlBblY08rwZDff6tNU9cjv6j//Q==}
+    dev: false
 
   /fast-copy@3.0.1:
     resolution: {integrity: sha512-Knr7NOtK3HWRYGtHoJrjkaWepqT8thIVGAwt0p0aUs1zqkAzXZV4vo9fFNwyb5fcqK1GKYFYxldQdIDVKhUAfA==}
@@ -11420,6 +11425,7 @@ packages:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+    dev: false
 
   /pretty-bytes@5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
@@ -11644,6 +11650,15 @@ packages:
     transitivePeerDependencies:
       - '@babel/preset-env'
       - supports-color
+
+  /react-native-get-random-values@1.9.0(react-native@0.71.3):
+    resolution: {integrity: sha512-+29IR2oxzxNVeaRwCqGZ9ABadzMI8SLTBidrIDXPOkKnm5+kEmLt34QKM4JV+d2usPErvKyS85le0OmGTHnyWQ==}
+    peerDependencies:
+      react-native: '>=0.56'
+    dependencies:
+      fast-base64-decode: 1.0.0
+      react-native: 0.71.3(@babel/core@7.20.2)(react@18.2.0)
+    dev: false
 
   /react-native-gradle-plugin@0.71.15:
     resolution: {integrity: sha512-7S3pAuPaQJlhax6EZ4JMsDNpj05TfuzX9gPgWLrFfAIWIFLuJ6aDQYAZy2TEI9QJALPoWrj8LWaqP/DGYh14pw==}

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@acme/monorepo",
+  "name": "@autotoor/monorepo",
   "scripts": {
     "clean": "turbo run clean && rm -rf node_modules",
     "dev": "turbo dev",

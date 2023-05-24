@@ -50,7 +50,7 @@
     }
   },
   "eslintConfig": {
-    "extends": "@acme/eslint-config",
+    "extends": "@autotoor/eslint-config",
     "ignorePatterns": [
       "node_modules",
       "build"
