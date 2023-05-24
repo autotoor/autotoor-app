@@ -1,10 +1,5 @@
-import { Paragraph, Strong } from '@autotoor/ui';
-import { ComponentProps } from 'react';
+import { Strong } from '@autotoor/ui';
 
-type HomeScreenProps = ComponentProps<typeof Paragraph>;
-
-export const HomeScreen = (props: HomeScreenProps) => (
-  <Paragraph {...props}>
-    This is a working <Strong>Expo monorepo</Strong>!
-  </Paragraph>
+export const HomeScreen = () => (
+    <Strong>Home Screen</Strong>
 );
