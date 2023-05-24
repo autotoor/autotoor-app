@@ -13,6 +13,9 @@ packages/*/dist
 __generated__
 web-build
 
+# Cache
+.cache
+
 # macOS
 .DS_Store
 
@@ -54,6 +57,7 @@ xcuserdata
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
+.idea/codeStyles
 
 # Eclipse
 .project
