@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfig/base",
+  "extends": "@autotoor/tsconfig/base",
   "compilerOptions": {
     "baseUrl": "./",
     "emitDecoratorMetadata": true,
