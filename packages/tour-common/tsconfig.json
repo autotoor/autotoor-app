@@ -5,7 +5,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "incremental": true,
-    "outDir": "./build",
+    "outDir": "./dist",
     "noEmit": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true

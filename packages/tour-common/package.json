@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "description": "Common Tour Types",
   "files": [
-    "build"
+    "dist"
   ],
-  "main": "build/index.js",
-  "typings": "build/index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "type-check": "tsc",
     "lint": "NODE_OPTIONS=\"--max-old-space-size=5120\" eslint --ext .ts,.tsx src",
     "build": "tsc -b",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "test": "NODE_ENV=test jest --passWithNoTests"
   },
   "keywords": [],

@@ -2,7 +2,7 @@
   "private": true,
   "name": "@autotoor/monorepo",
   "scripts": {
-    "clean": "turbo run clean && rm -rf node_modules && rm -rf packages/*/node_modules && rm -rf apps/*/node_modules && rm -rf packages/*/build  && rm -rf apps/*/build && rm -rf packages/*/dist  && rm -rf apps/*/dist",
+    "clean": "turbo run clean && rm -rf node_modules",
     "dev": "turbo dev",
     "dev:mobile": "turbo dev --filter=\"{./apps/mobile}...\"",
     "dev:tour": "turbo dev --filter=\"{./apps/tour-service}...\"",
