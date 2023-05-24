@@ -51,13 +51,7 @@ xcuserdata
 # Android Studio
 *.iml
 .gradle
-.idea/libraries
-.idea/workspace.xml
-.idea/gradle.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-.idea/codeStyles
+.idea
 
 # Eclipse
 .project
