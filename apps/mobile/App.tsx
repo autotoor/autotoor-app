@@ -1,6 +1,7 @@
-import { HomeIcon, HomeScreen } from '@autotoor/feature-home';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
+import { HomeIcon } from './HomeIcon';
+import { HomeScreen } from './HomeScreen';
 
 export default function App() {
   return (
