@@ -1,4 +1,5 @@
-import { Coordinates, DistanceUnit } from '@autotoor/tour-common';
+import type { Coordinates } from '@autotoor/tour-common';
+import { DistanceUnit } from '@autotoor/tour-common';
 import { Injectable } from '@nestjs/common';
 import geodist from 'geodist';
 

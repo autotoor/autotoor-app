@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import {
-  DistanceUnit,
-  LocalLandmarkSearchCriteria,
-} from '@autotoor/tour-common';
+import type { LocalLandmarkSearchCriteria } from '@autotoor/tour-common';
+import { DistanceUnit } from '@autotoor/tour-common';
 import { IsEnum, IsInt, IsOptional } from 'class-validator';
 
 import { CoordinatesDto } from './coordinates.dto';

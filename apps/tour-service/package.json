@@ -30,6 +30,7 @@
     "class-validator": "^0.14.0",
     "geodist": "^0.2.1",
     "nestjs-pino": "^3.2.0",
+    "p-map": "4.0.0",
     "pino-http": "^8.3.3",
     "pino-pretty": "^10.0.0",
     "reflect-metadata": "^0.1.13",

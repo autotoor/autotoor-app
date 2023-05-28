@@ -1,5 +1,6 @@
-import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
+import type { INestApplication } from '@nestjs/common';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import request from 'supertest';
 
 import { AppModule } from '../../src/app.module';
@@ -20,10 +21,10 @@ describe('Landmark Routes Test', () => {
     await app.init();
   });
 
-  describe('GET /landmark/local', () => {
+  describe('GET /landmark/v1/landmark/local', () => {
     it('should return an empty array', async () => {
       return request(app.getHttpServer())
-        .get('/landmark/local?latitude=123.45&longitude=987.53')
+        .get('/landmark/v1/landmark/local?latitude=123.45&longitude=987.53')
         .expect(200)
         .expect([]);
     });
