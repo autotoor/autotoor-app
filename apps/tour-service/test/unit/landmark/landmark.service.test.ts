@@ -62,6 +62,7 @@ describe('LandmarkService', () => {
           provider: LANDMARK_DATA_1.provider,
           readableSummary: LANDMARK_DATA_1.readableSummary,
           title: LANDMARK_SUMMARY_1.title,
+          url: LANDMARK_DATA_1.url,
         },
       };
       expect(localLandmark).toMatchObject(expected);

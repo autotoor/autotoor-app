@@ -44,6 +44,7 @@ describe('Landmark Routes Test', () => {
             coordinates: COORDS_2,
             imageUrl:
               'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Broad_Street_Downtown_Area_in_Nevada_City%2C_California.jpg/150px-Broad_Street_Downtown_Area_in_Nevada_City%2C_California.jpg',
+            url: 'https://en.wikipedia.org/wiki/Nevada_City,_California',
           },
         },
       ];

@@ -12,6 +12,11 @@ export interface Landmark {
   title: string;
 
   /**
+   * URL where more info can be found
+   */
+  url: string;
+
+  /**
    * The url of the image to display for the landmark.
    */
   imageUrl: string;

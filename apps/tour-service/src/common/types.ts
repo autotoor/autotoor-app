@@ -56,6 +56,11 @@ export interface LandmarkDetails {
   title: string;
 
   /**
+   * URL where more info can be found
+   */
+  url: string;
+
+  /**
    * The url of the image to display for the landmark.
    */
   imageUrl: string;
@@ -105,6 +110,11 @@ export interface LandmarkData {
    * A readable summary about the landmark
    */
   readableSummary: string;
+
+  /**
+   * A URL to a page with more details
+   */
+  url: string;
 }
 
 export interface LandmarkProvider {

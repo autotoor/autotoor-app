@@ -39,6 +39,7 @@ function internalToLandmark(landmark: LandmarkDetails): Landmark {
     readableSummary: landmark.readableSummary,
     coordinates: landmark.coordinates,
     imageUrl: landmark.imageUrl,
+    url: landmark.url,
   };
 }
 

@@ -18,9 +18,12 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
 
   private readonly wikipediaClient: WikipediaClientService;
 
-  private static readonly providerName: 'wikipedia';
+  private static readonly PROVIDER_NAME: 'wikipedia';
 
-  private static readonly characterLimit: number = 1200;
+  private static readonly CHARACTER_LIMIT: number = 1200;
+
+  private static readonly WIKIPEDIA_PAGE_PREFIX =
+    'https://en.wikipedia.org/wiki/';
 
   constructor(
     @InjectPinoLogger(WikipediaLandmarkProviderService.name) logger: PinoLogger,
@@ -46,12 +49,15 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
 
     const summaryText = pageDetails.extract;
 
-    const cleanedSummaryText = await this.cleanupSummary(summaryText);
+    const readableSummary = await this.cleanupSummary(summaryText);
+
+    const url = this.getUrl(pageDetails.title);
 
     return {
       imageUrl: landmarkSummary.imageUrl,
-      provider: WikipediaLandmarkProviderService.providerName,
-      readableSummary: cleanedSummaryText,
+      provider: WikipediaLandmarkProviderService.PROVIDER_NAME,
+      readableSummary,
+      url,
     };
   }
 
@@ -70,7 +76,7 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
     const allowedParts: string[] = [];
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < cleanedParts.length; i++) {
-      if (characterCount > WikipediaLandmarkProviderService.characterLimit) {
+      if (characterCount > WikipediaLandmarkProviderService.CHARACTER_LIMIT) {
         break;
       }
       characterCount += cleanedParts[i].length;
@@ -113,7 +119,7 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
   ): LandmarkSummary {
     return {
       id: pageSummary.pageid.toString(),
-      provider: WikipediaLandmarkProviderService.providerName,
+      provider: WikipediaLandmarkProviderService.PROVIDER_NAME,
       imageUrl: pageSummary.thumbnail?.source,
       coordinates: {
         latitude: pageSummary.coordinates[0].lat,
@@ -121,5 +127,10 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
       },
       title: pageSummary.title,
     };
+  }
+
+  private getUrl(title: string): string {
+    const formattedTitle = title.split(' ').join('_');
+    return `${WikipediaLandmarkProviderService.WIKIPEDIA_PAGE_PREFIX}${formattedTitle}`;
   }
 }

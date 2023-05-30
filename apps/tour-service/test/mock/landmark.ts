@@ -28,6 +28,9 @@ export const IMG_URL_1 = 'http://img1.url';
 
 export const IMG_URL_2 = 'http://img2.url';
 
+export const PAGE_URL_1 =
+  'https://en.wikipedia.org/wiki/Aaron_A._Sargent_House';
+
 export const LANDMARK_PROVIDER_1 = 'provider-1';
 
 export const LANDMARK_SUMMARY_1: LandmarkSummary = {
@@ -42,4 +45,5 @@ export const LANDMARK_DATA_1: LandmarkData = {
   readableSummary: LANDMARK_READABLE_SUMMARY_1,
   imageUrl: IMG_URL_1,
   provider: LANDMARK_PROVIDER_1,
+  url: PAGE_URL_1,
 };
