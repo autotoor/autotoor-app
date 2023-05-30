@@ -5,7 +5,7 @@ module.exports = {
         tsconfigRootDir: __dirname,
         sourceType: 'module',
     },
-    plugins: ['@typescript-eslint/eslint-plugin', 'import', 'jest', 'prettier'],
+    plugins: ['@typescript-eslint/eslint-plugin', 'import', 'jest', 'prettier', 'unused-imports'],
     extends: [
         'airbnb-base',
         'airbnb',
@@ -67,8 +67,11 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-shadow': ['error'],
+        '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_' }],
         'no-shadow': 0,
         'import/extensions': ['error', 'never', { ignorePackages: true }],
+        'import/no-extraneous-dependencies': 'off',
+        'import/no-unresolved': 'off',
         'import/order': [
             'error',
             {
@@ -89,6 +92,10 @@ module.exports = {
                 },
             },
         ],
+        'no-duplicate-imports': 'off',
+        "unused-imports/no-unused-imports": "error",
+        '@typescript-eslint/no-duplicate-imports': ['error', { includeExports: true }],
+        '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
     },
 };
 

@@ -1,14 +1,29 @@
-import { LocalLandmark } from '@autotoor/tour-common';
+import type { LocalLandmark } from '@autotoor/tour-common';
 import { Controller, Get, Query } from '@nestjs/common';
 
 import { LocalLandmarkSearchCriteriaDto } from './dto/local-landmark-search-criteria.dto';
+import { LandmarkService } from './landmark.service';
+import {
+  internalToLocalLandmark,
+  localLandmarkSearchCriteriaToInternal,
+} from '../common/converters';
 
-@Controller('/landmark')
+@Controller('/landmark/v1')
 export class LandmarkController {
-  @Get('/local')
+  private readonly landmarkService: LandmarkService;
+
+  constructor(landmarkService: LandmarkService) {
+    this.landmarkService = landmarkService;
+  }
+
+  @Get('/landmark/local')
   public async getLocalLandmarks(
-    @Query() _criteria: LocalLandmarkSearchCriteriaDto,
+    @Query() criteria: LocalLandmarkSearchCriteriaDto,
   ): Promise<LocalLandmark[]> {
-    return [];
+    return (
+      await this.landmarkService.getLocalLandmarks(
+        localLandmarkSearchCriteriaToInternal(criteria),
+      )
+    ).map(internalToLocalLandmark);
   }
 }

@@ -6,5 +6,5 @@ afterEach(cleanup);
 
 it('says Expo monorepo', () => {
   render(<HomeScreen />);
-  expect(screen.getByText('Expo monorepo')).toBeDefined();
+  expect(screen.getByText('Home Screen')).toBeDefined();
 });
