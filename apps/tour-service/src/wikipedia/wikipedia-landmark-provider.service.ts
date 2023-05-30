@@ -67,8 +67,10 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
    * @private
    */
   private async cleanupSummary(summaryText: string): Promise<string> {
-    // only include up to == See also == section at the most
-    const parts: string[] = summaryText.split(/== See also ==\\n/);
+    // only include up to == See also == or == Images == section at the most
+    const parts: string[] = summaryText.split(
+      /\n{3}(== See also ==|== Images ==)\n/,
+    );
     // split out section headers that look like /n/n== Section Header ==/n/n
     const cleanedParts: string[] = parts[0].split(/\n*={2,}\s[\w\s,]+\s=+\n/g);
     // Only include sections before the character limit is reached and the first one that goes over
