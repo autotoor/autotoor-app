@@ -70,8 +70,10 @@ export class LandmarkService {
         distanceUnit,
       );
 
-      const landmarkData: LandmarkData =
+      const landmarkData: LandmarkData | null =
         await this.wikipediaLandmarkProvider.getLandmarkData(landmarkSummary);
+
+      if (!landmarkData) return null;
 
       return {
         landmark: {

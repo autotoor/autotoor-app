@@ -112,5 +112,7 @@ export interface LandmarkProvider {
     criteria: LocalLandmarkCriteria,
   ): Promise<LandmarkSummary[]>;
 
-  getLandmarkData(landmarkSummary: LandmarkSummary): Promise<LandmarkData>;
+  getLandmarkData(
+    landmarkSummary: LandmarkSummary,
+  ): Promise<LandmarkData | null>;
 }

@@ -20,6 +20,8 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
 
   private static readonly providerName: 'wikipedia';
 
+  private static readonly characterLimit: number = 1200;
+
   constructor(
     @InjectPinoLogger(WikipediaLandmarkProviderService.name) logger: PinoLogger,
     wikipediaClient: WikipediaClientService,
@@ -30,17 +32,51 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
 
   public async getLandmarkData(
     landmarkSummary: LandmarkSummary,
-  ): Promise<LandmarkData> {
+  ): Promise<LandmarkData | null> {
     const response: WikipediaResponse<WikipediaPageDetails> =
       await this.wikipediaClient.getPageDetails(landmarkSummary.id);
-    const summaryText =
-      response.query.pages.length > 0 ? response.query.pages[0].extract : '';
+
+    if (!response.query.pages || response.query.pages.length === 0) return null;
+
+    const pageDetails: WikipediaPageDetails = response.query.pages[0];
+
+    this.logger.debug(
+      `Processing WikipediaPageDetails data for ${pageDetails.title}`,
+    );
+
+    const summaryText = pageDetails.extract;
+
+    const cleanedSummaryText = await this.cleanupSummary(summaryText);
 
     return {
       imageUrl: landmarkSummary.imageUrl,
       provider: WikipediaLandmarkProviderService.providerName,
-      readableSummary: summaryText,
+      readableSummary: cleanedSummaryText,
     };
+  }
+
+  /**
+   * Cleans up the summary text to optimize for reading
+   * @param summaryText the raw summary text from wikipedia
+   * @private
+   */
+  private async cleanupSummary(summaryText: string): Promise<string> {
+    // only include up to == See also == section at the most
+    const parts: string[] = summaryText.split(/== See also ==\\n/);
+    // split out section headers that look like /n/n== Section Header ==/n/n
+    const cleanedParts: string[] = parts[0].split(/\n*={2,}\s[\w\s,]+\s=+\n/g);
+    // Only include sections before the character limit is reached and the first one that goes over
+    let characterCount = 0;
+    const allowedParts: string[] = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < cleanedParts.length; i++) {
+      if (characterCount > WikipediaLandmarkProviderService.characterLimit) {
+        break;
+      }
+      characterCount += cleanedParts[i].length;
+      allowedParts.push(cleanedParts[i]);
+    }
+    return allowedParts.join(' ');
   }
 
   public async getLandmarkSummaries(
