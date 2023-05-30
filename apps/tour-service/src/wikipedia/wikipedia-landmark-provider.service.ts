@@ -48,20 +48,28 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
   ): Promise<LandmarkSummary[]> {
     this.logger.debug({ criteria }, 'Getting landmark summaries for criteria');
     const { coordinates, maxCount } = criteria;
-    const response: WikipediaResponse<WikipediaPageSummary> =
-      await this.wikipediaClient.getLocalPageSummaries(coordinates, {
-        ggslimit: maxCount,
-        ggsradius: 10000,
-      });
+    try {
+      const response: WikipediaResponse<WikipediaPageSummary> =
+        await this.wikipediaClient.getLocalPageSummaries(coordinates, {
+          ggslimit: maxCount,
+          ggsradius: 10000,
+        });
 
-    this.logger.debug(
-      { criteria, response },
-      `Received ${response?.query?.pages?.length} nearby wikipedia pages`,
-    );
+      this.logger.debug(
+        { criteria, response },
+        `Received ${response?.query?.pages?.length} nearby wikipedia pages`,
+      );
 
-    return response.query.pages.map((pageSummary) =>
-      this.pageSummaryToLandmarkSummary(pageSummary),
-    );
+      return response.query.pages.map((pageSummary) =>
+        this.pageSummaryToLandmarkSummary(pageSummary),
+      );
+    } catch (error) {
+      this.logger.warn(
+        { error },
+        `Error getting landmark summaries for coordinates: latitude: ${coordinates?.latitude}, longitude: ${coordinates?.longitude}`,
+      );
+      return [];
+    }
   }
 
   private pageSummaryToLandmarkSummary(
