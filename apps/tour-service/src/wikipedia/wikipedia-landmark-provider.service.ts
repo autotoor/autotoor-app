@@ -65,6 +65,7 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
 
   public toImageUrl(thumbnail?: string): string | undefined {
     if (!thumbnail) return undefined;
+    if (thumbnail.endsWith('.svg.png')) return thumbnail;
     const imageUrl = thumbnail
       .replace(/\/thumb\//, '/')
       .replace(/\/[^/]*$/, '');
