@@ -29,7 +29,7 @@ export const LandmarkDisplayScreen = (props: LandmarkDisplayScreenProps) => {
     <>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {isError && <Strong style={{ color: 'red' }}>{errorMessage}</Strong>}
-        {isLoading ? (
+        {isLoading || !imageUrl ? (
           <Strong style={{ color: 'purple' }}>Loading ...</Strong>
         ) : (
           <Image style={{ width: '100%', height: '50%' }} source={{ uri: imageUrl }}></Image>

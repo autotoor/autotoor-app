@@ -20,7 +20,7 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
 
   private static readonly PROVIDER_NAME: 'wikipedia';
 
-  private static readonly CHARACTER_LIMIT: number = 1200;
+  private static readonly CHARACTER_LIMIT: number = 3999;
 
   private static readonly WIKIPEDIA_PAGE_PREFIX =
     'https://en.wikipedia.org/wiki/';
@@ -53,12 +53,22 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
 
     const url = this.getUrl(pageDetails.title);
 
+    const imageUrl = this.toImageUrl(landmarkSummary.imageUrl);
+
     return {
-      imageUrl: landmarkSummary.imageUrl,
+      imageUrl,
       provider: WikipediaLandmarkProviderService.PROVIDER_NAME,
       readableSummary,
       url,
     };
+  }
+
+  public toImageUrl(thumbnail?: string): string | undefined {
+    if (!thumbnail) return undefined;
+    const imageUrl = thumbnail
+      .replace(/\/thumb\//, '/')
+      .replace(/\/[^/]*$/, '');
+    return imageUrl;
   }
 
   /**
@@ -72,17 +82,20 @@ export class WikipediaLandmarkProviderService implements LandmarkProvider {
       /\n{3}(== See also ==|== Images ==)\n/,
     );
     // split out section headers that look like /n/n== Section Header ==/n/n
-    const cleanedParts: string[] = parts[0].split(/\n*={2,}\s[\w\s,]+\s=+\n/g);
+    const cleanedParts: string[] = parts[0].split(/\n*={2,}\s.*?\s=+\n/g); // /\n*={2,}\s[\w\s,]+\s=+\n/g);
     // Only include sections before the character limit is reached and the first one that goes over
+    const cleanedAndSplitParts: string[] = cleanedParts
+      .flatMap((part) => part.split(/\n\n/g))
+      .map((part) => part.replace(/\n== .+ ==/g, '').trim());
     let characterCount = 0;
     const allowedParts: string[] = [];
     // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < cleanedParts.length; i++) {
+    for (let i = 0; i < cleanedAndSplitParts.length; i++) {
+      characterCount += cleanedAndSplitParts[i].length;
       if (characterCount > WikipediaLandmarkProviderService.CHARACTER_LIMIT) {
         break;
       }
-      characterCount += cleanedParts[i].length;
-      allowedParts.push(cleanedParts[i]);
+      allowedParts.push(cleanedAndSplitParts[i]);
     }
     return allowedParts.join(' ');
   }

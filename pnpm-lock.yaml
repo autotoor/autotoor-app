@@ -40,6 +40,9 @@ importers:
       expo-updates:
         specifier: ~0.16.3
         version: 0.16.3(expo@48.0.4)
+      geodist:
+        specifier: ^0.2.1
+        version: 0.2.1
       react:
         specifier: 18.2.0
         version: 18.2.0
