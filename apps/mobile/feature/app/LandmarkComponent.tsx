@@ -1,5 +1,6 @@
 import { DistanceUnit, LocalLandmark } from '@autotoor/tour-common';
 import axios from 'axios';
+import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import { LocationAccuracy, LocationObject } from 'expo-location';
 import { useEffect, useState } from 'react';
@@ -14,8 +15,6 @@ export interface LandmarkComponentProps {
 }
 export const LandmarkComponent = (props: LandmarkComponentProps) => {
   const { speechService, geoService } = props;
-  const baseUrl = 'http://10.0.0.19:3333/api/tour/landmark/v1/landmark/local';
-  // const baseUrl = 'http://192.168.214.22:3333/api/tour/landmark/v1/landmark/local';
   const [location, setLocation] = useState<LocationObject | null>(null);
   const [currentLocation, setCurrentLocation] = useState<LocationObject | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -33,6 +32,20 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
       alert(s);
     }
   };
+
+  const getHostDomain = (): string => {
+    const { manifest } = Constants;
+    const nonDevHostname = 'https://autotoor.com';
+    const hostname =
+      typeof manifest?.packagerOpts === `object` &&
+      manifest.packagerOpts.dev &&
+      manifest.debuggerHost
+        ? manifest?.debuggerHost.split(`:`).shift()?.concat(`:3333`)
+        : nonDevHostname;
+    return hostname ? `http://${hostname}` : nonDevHostname;
+  };
+
+  const baseUrl = `${getHostDomain()}/api/tour/landmark/v1/landmark/local`;
 
   /**
    * This periodically updates the currentLocation
