@@ -23,15 +23,6 @@ This monorepo uses a simple npm script convention of `dev:<app-name>` and `build
 - `$ pnpm build:mobile` - Build **apps/mobile** and all **packages** used in mobile, for production deployments
 - `$ pnpm build:tour` - Build **apps/tour-service** and all **packages** used in tour-service, for production deployments
 
-### Switching to yarn or npm
-
-You can use yarn or npm with this monorepo as well. If you want to use one of these package managers, instead of pnpm, all you have to do is:
-
-- Remove **.npmrc**, **pnpm-lock.yaml**, and **pnpm-workspace.yaml**.
-- Remove the `pnpm` property from the root **package.json** file.
-- Add the [`workspaces`](https://docs.npmjs.com/cli/v8/using-npm/workspaces) property to the root **package.json** file.
-- Update the workflows to use yarn or npm instead.
-
 ## 📁 Structure
 
 - [`apps`](./apps) - Apps that only use packages and aren't aware of other apps.
@@ -49,15 +40,14 @@ You can use yarn or npm with this monorepo as well. If you want to use one of th
 - [`packages/tour-common`](./packages/tour-common) - Shared tour types for both FE and BE. Uses the `eslint-config-backend` package
 - [`packages/ui`](./packages/ui) - Shared React Native UI components for apps, using the `eslint-config` package.
 
-## 👷 Workflows
+## Tour Service Docker Build
 
-- [`build`](./.github/workflows/build.yml) - Starts the EAS builds for **apps/mobile** using the given profile.
-- [`preview`](./.github/workflows/preview.yml) - Publishes apps to a PR-specific release channel and adds a QR code to that PR.
-- [`test`](./.github/workflows/test.yml) - Ensures that the apps and packages are healthy on multiple OSs.
+- [`apps/tour-service/docker/Dockerfile`](./apps/tour-service/docker/Dockerfile) - The production dockerfile for deploying the tour-service as a docker container in the cloud provider of your choosing.  Runs on port specified by the PORT env var (default is 80 if not set).
 
-### Composite workflows
+To build the docker image
+1. Make sure the app is built: `pnpm build`
+2. Run the tour-service docker build command: `pnpm build:docker:tour`
 
-- [`setup-monorepo`](./.github/actions/setup-monorepo/action.yml) - Reusable composite workflow to setup the monorepo in GitHub Actions.
 
 ## ⚠️ Caveats
 
@@ -78,22 +68,3 @@ To workaround these issues, we have to change some config:
 2. Either disable [`strict-peer-dependencies`](https://pnpm.io/npmrc#strict-peer-dependencies) or add [`peerDependencyRules.ignoreMissing`](./package.json#L14-L22) rules in the **package.json**. This disables some of the expected implicit peer dependencies issues. Without these changes, pnpm will fail on install asking you to install various peer dependencies.
 
 3. Update the **metro.config.js** configuration for usage in monorepos. Full explanation per configuration option can be found in the [Expo docs](https://docs.expo.dev/guides/monorepos/#modify-the-metro-config). The only addition in this repository is the [`config.cacheStores`](./apps/mobile/metro.config.js#L22-L24). This change moves the Metro cache to a place which is accessible by Turborepo, our main cache handler (see [Why is it fast?](#-why-is-it-fast)).
-
-
-### Precompile packages
-
-EAS only sends the files which are committed to the repository. That means [the `packages/*/build` folders](.gitignore#L3) need to be generated before building our apps. To tell EAS how to compile our packages, we can [use the `postinstall` hook](https://docs.expo.dev/build-reference/how-tos/#how-to-set-up-eas-build-with).
-
-### Running EAS from apps directories
-
-As of writing, the `eas build` command needs to be executed from the package folder itself. EAS will still create a tarball with all files from your monorepo, but runs the build commands from this local folder. You can see this happening in the [build workflow](./.github/workflows/build.yml#L32).
-
-### Using local credentials in CI
-
-If you want to maintain the keystore or certificates yourself, you have to [configure EAS with local credentials](https://docs.expo.dev/app-signing/local-credentials/#credentialsjson). When your CI provider doesn't allow you to add "secret files", you can [encode these files to base64 strings](https://docs.expo.dev/app-signing/local-credentials/#using-local-credentials-on-builds-triggered-from) and decode whenever you need it.
-
-> It's highly recommended to keep keystores and certificates out of your repository to avoid security issues.
-
-## ❌ Common issues
-
-_No ongoing issues, we are actively monitoring and fixing potential issues_

@@ -1,3 +1,5 @@
+import * as process from 'process';
+
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Logger } from 'nestjs-pino';
@@ -19,6 +21,6 @@ async function bootstrap() {
       transformOptions: { enableImplicitConversion: true },
     }),
   );
-  await app.listen(3333);
+  await app.listen(process.env.PORT || 3333);
 }
 bootstrap();

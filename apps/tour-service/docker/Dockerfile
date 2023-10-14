@@ -48,6 +48,9 @@ RUN pnpm install -r --offline --ignore-scripts
 RUN pnpm turbo run build --filter="tour-service"
 
 FROM base AS runner
+
+ENV PORT=80
+
 WORKDIR /app
 
 # Use the node user from the image (instead of the root user)
