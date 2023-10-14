@@ -17,11 +17,16 @@
     "eas-build-post-install": "pnpm run -w build:mobile"
   },
   "dependencies": {
+    "@autotoor/tour-common": "*",
     "@autotoor/ui": "*",
+    "axios": "^1.4.0",
     "expo": "^48.0.4",
     "expo-dev-client": "~2.1.2",
+    "expo-location": "~15.1.1",
+    "expo-speech": "~11.1.1",
     "expo-status-bar": "~1.4.4",
     "expo-updates": "~0.16.3",
+    "geodist": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.3",
@@ -37,7 +42,8 @@
     "@types/react-native": "~0.70.6",
     "babel-preset-expo": "~9.3.0",
     "jest": "^29.4.3",
-    "jest-expo": "^48.0.1"
+    "jest-expo": "^48.0.1",
+    "ts-mockito": "^2.6.1"
   },
   "eslintConfig": {
     "extends": "@autotoor/eslint-config",
