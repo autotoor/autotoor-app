@@ -97,9 +97,3 @@ If you want to maintain the keystore or certificates yourself, you have to [conf
 ## ❌ Common issues
 
 _No ongoing issues, we are actively monitoring and fixing potential issues_
-
-<div align="center">
-  <br />
-  with&nbsp;:heart:&nbsp;&nbsp;<strong>byCedric</strong>
-  <br />
-</div>

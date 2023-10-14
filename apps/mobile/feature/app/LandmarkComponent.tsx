@@ -101,6 +101,7 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
           setUnreadLandmarks(landmarks);
           // we need to trigger ready for next if this is the first time we are doing this
           if (!currentLandmark) setIsReadyForNext(true);
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
           setErrorMsg('There was an error loading landmarks near you');
           setIsError(true);
@@ -189,7 +190,7 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
   let title: string = '';
   let imageUrl = '';
   if (!currentLandmark) {
-    landmarkText = 'Loading...';
+    landmarkText = '';
   } else {
     landmarkText = currentLandmark.landmark.readableSummary;
     imageUrl = currentLandmark.landmark.imageUrl;
