@@ -26,6 +26,14 @@ const styles = StyleSheet.create({
     height: 300,
     margin: 4,
   },
+  imageLoading: {
+    backgroundColor: 'black',
+    borderRadius: 20,
+    height: 300,
+    margin: 4,
+    resizeMode: 'contain',
+    width: '100%',
+  },
   scrollView: {
     alignSelf: 'center',
     borderRadius: 10,
@@ -105,7 +113,10 @@ export const LandmarkDisplayScreen = (props: LandmarkDisplayScreenProps) => {
       <ScrollView contentContainerStyle={styles.contentContainer} style={styles.scrollView}>
         {isError && <Strong style={{ color: 'red' }}>{errorMessage}</Strong>}
         {isLoading || !imageUrl ? (
-          <Strong style={{ color: 'purple' }}>Loading ...</Strong>
+          <Image
+            style={styles.imageLoading}
+            source={require('../../assets/loading-image.gif')}
+          ></Image>
         ) : (
           <Image style={styles.image} source={{ uri: imageUrl }}></Image>
         )}
