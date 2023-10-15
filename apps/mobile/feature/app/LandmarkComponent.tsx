@@ -33,17 +33,10 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
   };
 
   const getHostDomain = (): string => {
-    const { manifest } = Constants;
-    const nonDevHostname = 'https://api.autotoor.com';
-
-    if (
-      typeof manifest?.packagerOpts === `object` &&
-      manifest.packagerOpts.dev &&
-      manifest.debuggerHost
-    ) {
-      return `http://${manifest?.debuggerHost.split(`:`).shift()?.concat(`:3333`)}`;
+    if (Constants?.expoConfig?.hostUri) {
+      return `http://${Constants.expoConfig.hostUri.split(`:`).shift()?.concat(`:3333`)}`;
     }
-    return nonDevHostname;
+    return 'https://api.autotoor.com';
   };
 
   const baseUrl = `${getHostDomain()}/api/tour/landmark/v1/landmark/local`;
