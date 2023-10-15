@@ -14,8 +14,8 @@
     "build:docker:tour": "docker build -t tour-service . -f ./apps/tour-service/docker/Dockerfile"
   },
   "devDependencies": {
-    "turbo": "^1.10.3",
-    "typescript": "^4.8.3"
+    "turbo": "^1.10.7",
+    "typescript": "^4.9.5"
   },
   "pnpm": {
     "peerDependencyRules": {
