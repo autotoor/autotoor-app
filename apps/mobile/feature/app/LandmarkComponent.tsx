@@ -35,7 +35,7 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
 
   const getHostDomain = (): string => {
     const { manifest } = Constants;
-    const nonDevHostname = 'https://autotoor.com';
+    const nonDevHostname = 'https://api.autotoor.com';
     const hostname =
       typeof manifest?.packagerOpts === `object` &&
       manifest.packagerOpts.dev &&
