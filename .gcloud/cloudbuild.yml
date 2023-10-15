@@ -1,0 +1,4 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    script: |
+      gcloud run deploy cloudrunservice --image us-west2-docker.pkg.dev/autotoor/autotoor-docker-repo/tour-service:1.0 --region us-west1 --platform managed --allow-unauthenticated
