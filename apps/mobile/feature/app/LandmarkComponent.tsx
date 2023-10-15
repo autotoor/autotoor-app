@@ -22,7 +22,6 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
   const [isError, setIsError] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [unreadLandmarks, setUnreadLandmarks] = useState<LocalLandmark[]>([]);
-  const [visitedLandmarks, setVisitedLandmarks] = useState<LocalLandmark[]>([]);
   const [currentLandmark, setCurrentLandmark] = useState<LocalLandmark | null>(null);
   const [isReadyForNext, setIsReadyForNext] = useState(false);
 
@@ -144,10 +143,6 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
       setUnreadLandmarks(unreadLandmarks);
       // TODO - compare landmark to those already visited and skip forward if we have already seen it recently
       setCurrentLandmark(landmark);
-      setVisitedLandmarks((visited) => {
-        visited.push(landmark);
-        return visited;
-      });
     }
   };
 
@@ -186,7 +181,7 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
     advanceLandmark();
   };
 
-  let landmarkText = '';
+  let landmarkText: string;
   let title: string = '';
   let imageUrl = '';
   if (!currentLandmark) {
