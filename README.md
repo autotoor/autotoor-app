@@ -27,7 +27,7 @@ This monorepo uses a simple npm script convention of `dev:<app-name>` and `build
 1. Get the IP address of your local machine on the current network.  If you are on a mac, you can get this using the command: `echo $(ifconfig | awk '/inet /&&!/127.0.0.1/{print $2;exit}')`
 2. Ensure that all the services are up in running in development mode by running: `pnpm dev`
 3. Install the Expo Go app on your phone. You should be able to get it from the app store.
-4. In the Expo Go app, find the option to enter the url manually and set it to be: `exp://[IP_FROM_STEP_1]:19000` where `IP_FROM_STEP_1` is the IP Address from step 1.  For example if it returned `10.0.0.3` then the manual url should be `exp://10.0.0.3:19000`.  This should then open the app.
+4. In the Expo Go app, find the option to enter the url manually and set it to be: `exp://[IP_FROM_STEP_1]:8081` where `IP_FROM_STEP_1` is the IP Address from step 1.  For example if it returned `10.0.0.3` then the manual url should be `exp://10.0.0.3:8081`.  This should then open the app.
 
 ## 📁 Structure
 
