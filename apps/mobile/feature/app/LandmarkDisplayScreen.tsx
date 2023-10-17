@@ -115,7 +115,11 @@ export const LandmarkDisplayScreen = (props: LandmarkDisplayScreenProps) => {
         {isLoading || !imageUrl ? (
           <Image
             style={styles.imageLoading}
-            source={require('../../assets/loading-image.gif')}
+            source={
+              isLoading
+                ? require('../../assets/loading-image.gif')
+                : require('../../assets/icon.png')
+            }
           ></Image>
         ) : (
           <Image style={styles.image} source={{ uri: imageUrl }}></Image>
