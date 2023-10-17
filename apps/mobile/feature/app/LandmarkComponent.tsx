@@ -68,7 +68,7 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
           locToCoords(currentLocation),
           DistanceUnit.METER
         );
-        if (distance > 2000) {
+        if (distance > 1000) {
           debug(`Setting location, distance change: ${distance}`);
           setLocation(currentLocation);
         } else {
@@ -128,6 +128,9 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
           await speechService.stop();
           await speechService.speak(text, onSpeechDone);
         }
+      } else if (currentLandmark === null) {
+        // if we have advanced past the last landmark we set to null and stop the speech
+        await speechService.stop();
       }
     })().catch(console.error);
   }, [currentLandmark]);
@@ -138,6 +141,11 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
       setUnreadLandmarks(unreadLandmarks);
       // TODO - compare landmark to those already visited and skip forward if we have already seen it recently
       setCurrentLandmark(landmark);
+    } else {
+      // if we are out of landmarks, trigger load of more by clearing currentLandmark and locations
+      setCurrentLandmark(null);
+      setLocation(null);
+      setCurrentLocation(null);
     }
   };
 
