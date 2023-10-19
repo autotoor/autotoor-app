@@ -26,10 +26,18 @@ const styles = StyleSheet.create({
     height: 300,
     margin: 4,
   },
-  imageLoading: {
+  imageNone: {
     backgroundColor: 'black',
     borderRadius: 20,
     height: 300,
+    margin: 4,
+    resizeMode: 'contain',
+    width: '100%',
+  },
+  imageLoading: {
+    backgroundColor: 'black',
+    borderRadius: 20,
+    height: '100%',
     margin: 4,
     resizeMode: 'contain',
     width: '100%',
@@ -112,30 +120,31 @@ export const LandmarkDisplayScreen = (props: LandmarkDisplayScreenProps) => {
     <>
       <ScrollView contentContainerStyle={styles.contentContainer} style={styles.scrollView}>
         {isError && <Strong style={{ color: 'red' }}>{errorMessage}</Strong>}
-        {isLoading || !imageUrl ? (
+        {!imageUrl && isLoading ? (
           <Image
             style={styles.imageLoading}
-            source={
-              isLoading
-                ? require('../../assets/loading-image.gif')
-                : require('../../assets/icon.png')
-            }
+            source={require('../../assets/loading-image.gif')}
           ></Image>
         ) : (
-          <Image style={styles.image} source={{ uri: imageUrl }}></Image>
+          <>
+            <Image
+              style={imageUrl ? styles.image : styles.imageNone}
+              source={imageUrl ? { uri: imageUrl } : require('../../assets/icon.png')}
+            ></Image>
+            <Text style={styles.title}>{title}</Text>
+            <Pressable style={isPaused ? styles.startButton : styles.stopButton} onPress={onPause}>
+              <Text style={styles.buttonText}>{isPaused ? 'Start' : 'Pause'}</Text>
+            </Pressable>
+            <Pressable style={styles.nextButton} onPress={onNext}>
+              <Text style={styles.buttonText}>Next</Text>
+            </Pressable>
+            {paragraphs.map((paragraph, index) => (
+              <Text key={index} style={styles.paragraph}>
+                {paragraph}
+              </Text>
+            ))}
+          </>
         )}
-        <Text style={styles.title}>{title}</Text>
-        <Pressable style={isPaused ? styles.startButton : styles.stopButton} onPress={onPause}>
-          <Text style={styles.buttonText}>{isPaused ? 'Start' : 'Pause'}</Text>
-        </Pressable>
-        <Pressable style={styles.nextButton} onPress={onNext}>
-          <Text style={styles.buttonText}>Next</Text>
-        </Pressable>
-        {paragraphs.map((paragraph, index) => (
-          <Text key={index} style={styles.paragraph}>
-            {paragraph}
-          </Text>
-        ))}
       </ScrollView>
     </>
   );

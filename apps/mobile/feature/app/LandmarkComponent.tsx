@@ -14,6 +14,8 @@ export interface LandmarkComponentProps {
   geoService: GeoService;
 }
 export const LandmarkComponent = (props: LandmarkComponentProps) => {
+  const distanceThresholdMeters = 1500;
+  const locationPollIntervalMillis = 10000;
   const { speechService, geoService } = props;
   const [location, setLocation] = useState<LocationObject | null>(null);
   const [currentLocation, setCurrentLocation] = useState<LocationObject | null>(null);
@@ -48,7 +50,7 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
     updateCurrentLocation().catch(console.error);
     const interval = setInterval(() => {
       updateCurrentLocation().catch(console.error);
-    }, 10000);
+    }, locationPollIntervalMillis);
     return () => {
       clearInterval(interval);
     };
@@ -68,7 +70,7 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
           locToCoords(currentLocation),
           DistanceUnit.METER
         );
-        if (distance > 1000) {
+        if (distance > distanceThresholdMeters) {
           debug(`Setting location, distance change: ${distance}`);
           setLocation(currentLocation);
         } else {
@@ -144,6 +146,7 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
     } else {
       // if we are out of landmarks, trigger load of more by clearing currentLandmark and locations
       setCurrentLandmark(null);
+      setIsLoading(true);
       setLocation(null);
       setCurrentLocation(null);
     }
