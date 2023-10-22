@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "@autotoor/ui",
+  "name": "@autotoor/ui-common",
   "version": "1.0.0",
-  "description": "Autotoor UI components for React Native",
+  "description": "Autotoor shared UI components",
   "author": "Alex Levine",
   "license": "MIT",
   "main": "./build/index.js",
