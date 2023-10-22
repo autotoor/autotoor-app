@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@autotoor/tour-common": "*",
-    "@autotoor/ui": "*",
+    "@autotoor/ui-common": "*",
     "axios": "^1.4.0",
     "expo": "^49.0.10",
     "expo-dev-client": "~2.4.11",

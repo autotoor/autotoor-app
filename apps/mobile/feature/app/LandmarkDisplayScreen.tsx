@@ -1,4 +1,4 @@
-import { Strong } from '@autotoor/ui';
+import { ErrorText } from '@autotoor/ui-common';
 import { Image, Pressable, ScrollView, StyleSheet, Text } from 'react-native';
 
 export interface LandmarkDisplayScreenProps {
@@ -119,7 +119,7 @@ export const LandmarkDisplayScreen = (props: LandmarkDisplayScreenProps) => {
   return (
     <>
       <ScrollView contentContainerStyle={styles.contentContainer} style={styles.scrollView}>
-        {isError && <Strong style={{ color: 'red' }}>{errorMessage}</Strong>}
+        {isError && <ErrorText>{errorMessage}</ErrorText>}
         {!imageUrl && isLoading ? (
           <Image
             style={styles.imageLoading}

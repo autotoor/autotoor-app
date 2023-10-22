@@ -1,4 +1,4 @@
-# The MIT License (MIT)
+# Base Repo MIT License (MIT)
 
 Copyright (c) 2021-present Cedric van Putten <me@bycedric.com>
 
