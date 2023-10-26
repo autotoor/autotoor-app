@@ -120,7 +120,7 @@ export const LandmarkDisplayScreen = (props: LandmarkDisplayScreenProps) => {
     <>
       <ScrollView contentContainerStyle={styles.contentContainer} style={styles.scrollView}>
         {isError && <ErrorText>{errorMessage}</ErrorText>}
-        {!imageUrl && isLoading ? (
+        {!landmarkText && isLoading ? (
           <Image
             style={styles.imageLoading}
             source={require('../../assets/loading-image.gif')}
