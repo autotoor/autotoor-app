@@ -58,7 +58,7 @@ env:
   GAR_LOCATION: us-west1 # Artifact Registry location
   REPOSITORY: docker-image-repository # Artifact Registry repository name
   SERVICE: tour-service # Cloud Run service name
-  REGION: us-west-1 # Cloud Run service region
+  REGION: us-west1 # Cloud Run service region
 
 jobs:
   deploy:
