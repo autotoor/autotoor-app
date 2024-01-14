@@ -50,6 +50,8 @@ RUN pnpm turbo run build --filter="tour-service"
 FROM base AS runner
 
 ENV PORT=80
+# location of static content served by tour service
+ENV STATIC_CONTENT_PATH=/app/apps/tour-service/static
 
 WORKDIR /app
 
