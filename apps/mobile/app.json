@@ -4,7 +4,7 @@
     "slug": "tour-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon512.png",
+    "icon": "./assets/icon512.jpg",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
@@ -24,7 +24,7 @@
     "android": {
       "package": "com.autotoor.tourapp",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon255.png",
+        "foregroundImage": "./assets/icon255.jpg",
         "backgroundColor": "#FFFFFF"
       },
       "permissions": [
