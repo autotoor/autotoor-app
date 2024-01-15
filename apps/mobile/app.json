@@ -24,7 +24,7 @@
     "android": {
       "package": "com.autotoor.tourapp",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon255.png",
+        "foregroundImage": "./assets/icon512.png",
         "backgroundColor": "#FFFFFF"
       },
       "permissions": [
