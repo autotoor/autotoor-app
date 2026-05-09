@@ -1,7 +1,7 @@
-FROM node:18.16.0-alpine AS base
+FROM node:22.11.0-alpine AS base
 
-ARG PNPM_VERSION=8.5.1
-ARG TURBO_VERSION=1.10.3
+ARG PNPM_VERSION=10.4.1
+ARG TURBO_VERSION=2.9.8
 
 # Install package manager
 RUN --mount=type=cache,id=pnpm-store,target=/root/.pnpm-store \
