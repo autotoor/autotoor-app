@@ -23,11 +23,16 @@ This monorepo uses a simple npm script convention of `dev:<app-name>` and `build
 - `$ pnpm build:mobile` - Build **apps/mobile** and all **packages** used in mobile, for production deployments
 - `$ pnpm build:tour` - Build **apps/tour-service** and all **packages** used in tour-service, for production deployments
 
-### Running the mobile app during local development using Expo Go
-1. Get the IP address of your local machine on the current network.  If you are on a mac, you can get this using the command: `echo $(ifconfig | awk '/inet /&&!/127.0.0.1/{print $2;exit}')`
-2. Ensure that all the services are up in running in development mode by running: `pnpm dev`
-3. Install the Expo Go app on your phone. You should be able to get it from the app store.
-4. In the Expo Go app, find the option to enter the url manually and set it to be: `exp://[IP_FROM_STEP_1]:8081` where `IP_FROM_STEP_1` is the IP Address from step 1.  For example if it returned `10.0.0.3` then the manual url should be `exp://10.0.0.3:8081`.  This should then open the app.
+### Running the mobile app during local development
+
+Expo SDK 55 may require a newer native runtime than the public App Store version of Expo Go provides. For local phone testing, use the development build profile. It installs as `autotoor-dev` with the bundle identifier `com.autotoor.tourapp.dev`, so it can live beside the production AutoToor app.
+
+1. Build and install the development client with EAS: `APP_VARIANT=development eas build --profile development --platform ios`
+2. Start the tour service locally: `pnpm dev:tour`
+3. Start Metro for the development client: `pnpm --filter @autotoor/app-mobile dev:client`
+4. Open `autotoor-dev` on the phone and connect it to the Metro URL shown in the terminal.
+
+Pure JavaScript and TypeScript changes reload from Metro. Rebuild the development client after changing Expo SDK versions, React Native versions, native dependencies, native permissions, bundle identifiers, or config plugins.
 
 ## 📁 Structure
 
@@ -53,3 +58,9 @@ This monorepo uses a simple npm script convention of `dev:<app-name>` and `build
 To build the docker image
 1. Make sure the app is built: `pnpm build`
 2. Run the tour-service docker build command: `pnpm build:docker:tour`
+
+### pnpm and Expo monorepos
+
+This repo uses Expo SDK 55 and pnpm's default isolated dependency layout. Expo now supports pnpm monorepos without the older `node-linker=hoisted` workaround, so workspace packages should be declared with `workspace:*` and Metro should use Expo's default monorepo configuration.
+
+The only custom Metro setting in this repository is [`config.cacheStores`](./apps/mobile/metro.config.js), which moves the Metro cache to a place Turborepo can restore.

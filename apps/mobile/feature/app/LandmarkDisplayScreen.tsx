@@ -13,6 +13,10 @@ export interface LandmarkDisplayScreenProps {
   onNext: () => void;
 }
 
+const imageRequestHeaders = {
+  'User-Agent': 'AutoToor/1.0 (https://autotoor.com; https://github.com/autotoor/autotoor-app)',
+};
+
 const styles = StyleSheet.create({
   paragraph: {
     color: 'white',
@@ -25,6 +29,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 300,
     margin: 4,
+    resizeMode: 'contain',
+    width: '100%',
   },
   imageNone: {
     backgroundColor: 'black',
@@ -129,7 +135,14 @@ export const LandmarkDisplayScreen = (props: LandmarkDisplayScreenProps) => {
           <>
             <Image
               style={imageUrl ? styles.image : styles.imageNone}
-              source={imageUrl ? { uri: imageUrl } : require('../../assets/icon.png')}
+              source={
+                imageUrl
+                  ? { uri: imageUrl, headers: imageRequestHeaders }
+                  : require('../../assets/icon.png')
+              }
+              onError={(event) => {
+                console.error('Unable to load landmark image', imageUrl, event.nativeEvent.error);
+              }}
             ></Image>
             <Text style={styles.title}>{title}</Text>
             <Pressable style={isPaused ? styles.startButton : styles.stopButton} onPress={onPause}>

@@ -27,5 +27,8 @@
   },
   "devDependencies": {
     "eslint-plugin-jsx-a11y": "^6.7.1"
+  },
+  "eslintConfig": {
+    "extends": "."
   }
 }

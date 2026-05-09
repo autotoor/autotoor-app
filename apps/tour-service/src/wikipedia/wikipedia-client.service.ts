@@ -1,7 +1,7 @@
 import type { Coordinates } from '@autotoor/tour-common';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import type { AxiosError } from 'axios';
+import type { AxiosError, AxiosRequestConfig } from 'axios';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { catchError, firstValueFrom } from 'rxjs';
 
@@ -20,6 +20,16 @@ export class WikipediaClientService {
   private readonly logger: PinoLogger;
 
   private static readonly WIKIPEDIA_DOMAIN = 'https://en.wikipedia.org';
+
+  private static readonly WIKIPEDIA_USER_AGENT =
+    process.env.WIKIPEDIA_USER_AGENT ??
+    'AutoToor/1.0 (https://autotoor.com; https://github.com/autotoor/autotoor-app)';
+
+  private static readonly REQUEST_CONFIG: AxiosRequestConfig = {
+    headers: {
+      'User-Agent': WikipediaClientService.WIKIPEDIA_USER_AGENT,
+    },
+  };
 
   constructor(
     httpClient: HttpService,
@@ -42,6 +52,7 @@ export class WikipediaClientService {
         .get<WikipediaResponse<WikipediaPageDetails>>(
           `${WikipediaClientService.WIKIPEDIA_DOMAIN}/w/api.php?explaintext`,
           {
+            ...WikipediaClientService.REQUEST_CONFIG,
             params: {
               action: 'query',
               prop: 'coordinates|pageimages|description|extracts',
@@ -55,7 +66,7 @@ export class WikipediaClientService {
         )
         .pipe(
           catchError((error: AxiosError) => {
-            this.logger.error(error.response.data);
+            this.logger.error(error.response?.data ?? error.message);
             throw new ApplicationError(
               `Error loading details for landmark with id: ${pageId}`,
               { pageId },
@@ -92,11 +103,14 @@ export class WikipediaClientService {
       this.httpClient
         .get<WikipediaResponse<WikipediaPageSummary>>(
           `${WikipediaClientService.WIKIPEDIA_DOMAIN}/w/api.php?`,
-          { params },
+          {
+            ...WikipediaClientService.REQUEST_CONFIG,
+            params,
+          },
         )
         .pipe(
           catchError((error: AxiosError) => {
-            this.logger.error(error.response.data);
+            this.logger.error(error.response?.data ?? error.message);
             throw new ApplicationError(
               `Error loading local page summaries for coordinates: ${coordinates.latitude}|${coordinates.longitude}`,
               { params },

@@ -43,7 +43,7 @@ describe('Landmark Routes Test', () => {
               "Nevada City (originally, Ustumah, a Nisenan village; later, Nevada, Deer Creek Dry Diggins, and Caldwell's Upper Store) is the county seat of Nevada County, California, United States, 60 miles (97 km) northeast of Sacramento, 84 miles (135 km) southwest of Reno and 147 miles (237 km) northeast of San Francisco.",
             coordinates: COORDS_2,
             imageUrl:
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Broad_Street_Downtown_Area_in_Nevada_City%2C_California.jpg/150px-Broad_Street_Downtown_Area_in_Nevada_City%2C_California.jpg',
+              'https://upload.wikimedia.org/wikipedia/commons/b/bf/Broad_Street_Downtown_Area_in_Nevada_City%2C_California.jpg',
             url: 'https://en.wikipedia.org/wiki/Nevada_City,_California',
           },
         },

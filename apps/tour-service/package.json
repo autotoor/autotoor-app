@@ -20,7 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
-    "@autotoor/tour-common": "*",
+    "@autotoor/tour-common": "workspace:*",
     "@nestjs/axios": "^2.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
@@ -38,8 +38,8 @@
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
-    "@autotoor/eslint-config-backend": "*",
-    "@autotoor/tsconfig": "*",
+    "@autotoor/eslint-config-backend": "workspace:*",
+    "@autotoor/tsconfig": "workspace:*",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
