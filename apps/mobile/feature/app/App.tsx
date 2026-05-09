@@ -8,6 +8,7 @@ import { GeoService, SpeechService } from '../../service';
 export default function App() {
   const [speechService] = useState(new SpeechService());
   const [geoService] = useState(new GeoService());
+
   return (
     <SafeAreaView style={styles.container}>
       <LandmarkComponent speechService={speechService} geoService={geoService} />

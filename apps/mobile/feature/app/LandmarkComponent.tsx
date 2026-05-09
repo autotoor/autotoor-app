@@ -4,10 +4,13 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import { LocationAccuracy, LocationObject } from 'expo-location';
 import { useEffect, useState } from 'react';
+import { Alert, NativeModules } from 'react-native';
 
 import { LandmarkDisplayScreen } from './LandmarkDisplayScreen';
 import { GeoService, SpeechService } from '../../service';
 import { locToCoords } from '../../service/geo/util';
+
+const localApiHost = '192.168.68.68';
 
 export interface LandmarkComponentProps {
   speechService: SpeechService;
@@ -16,6 +19,7 @@ export interface LandmarkComponentProps {
 export const LandmarkComponent = (props: LandmarkComponentProps) => {
   const distanceThresholdMeters = 1500;
   const locationPollIntervalMillis = 10000;
+  const connectionDebugTimeoutMillis = 30000;
   const { speechService, geoService } = props;
   const [location, setLocation] = useState<LocationObject | null>(null);
   const [currentLocation, setCurrentLocation] = useState<LocationObject | null>(null);
@@ -26,6 +30,7 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
   const [unreadLandmarks, setUnreadLandmarks] = useState<LocalLandmark[]>([]);
   const [currentLandmark, setCurrentLandmark] = useState<LocalLandmark | null>(null);
   const [isReadyForNext, setIsReadyForNext] = useState(false);
+  const [requestRetryCount, setRequestRetryCount] = useState(0);
 
   const alertsEnabled = false;
   const debug = (s: string) => {
@@ -34,10 +39,46 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
     }
   };
 
-  const getHostDomain = (): string => {
-    if (Constants?.expoConfig?.hostUri) {
-      return `http://${Constants.expoConfig.hostUri.split(`:`).shift()?.concat(`:3333`)}`;
+  const getExpoDevHost = (): string | undefined => {
+    const constants = Constants as typeof Constants & {
+      debuggerHost?: string;
+      expoGoConfig?: { hostUri?: string } | null;
+      linkingUri?: string;
+      manifest?: { debuggerHost?: string; hostUri?: string } | null;
+      manifest2?: { launchAsset?: { url?: string } } | null;
+    };
+    const hostUri =
+      process.env.EXPO_PUBLIC_AUTOTOOR_API_HOST ??
+      constants.expoConfig?.hostUri ??
+      constants.manifest2?.launchAsset?.url ??
+      constants.expoGoConfig?.hostUri ??
+      constants.manifest?.hostUri ??
+      constants.manifest?.debuggerHost ??
+      constants.debuggerHost ??
+      constants.linkingUri ??
+      NativeModules.SourceCode?.scriptURL;
+    if (!hostUri) return undefined;
+
+    try {
+      const uri = hostUri.includes('://') ? hostUri : `http://${hostUri}`;
+      return new URL(uri).hostname;
+    } catch {
+      return hostUri.split(':').shift();
     }
+  };
+
+  const getHostDomain = (): string => {
+    if (process.env.EXPO_PUBLIC_AUTOTOOR_API_BASE_URL) {
+      return process.env.EXPO_PUBLIC_AUTOTOOR_API_BASE_URL;
+    }
+
+    const devHost = getExpoDevHost();
+    if (devHost) return `http://${devHost}:3333`;
+
+    if (Constants.expoConfig?.extra?.appVariant === 'development' || __DEV__) {
+      return `http://${localApiHost}:3333`;
+    }
+
     return 'https://api.autotoor.com';
   };
 
@@ -84,28 +125,57 @@ export const LandmarkComponent = (props: LandmarkComponentProps) => {
    * This updates the list of landmarks when the location changes
    */
   useEffect(() => {
+    if (location === null) return undefined;
+
+    const controller = new AbortController();
+    let didLoadLandmarks = false;
+
+    const timeout = setTimeout(() => {
+      if (didLoadLandmarks) return;
+
+      Alert.alert('Unable to connect', `AutoToor could not load landmarks from:\n\n${baseUrl}`, [
+        {
+          onPress: () => {
+            controller.abort();
+            setRequestRetryCount((count) => count + 1);
+          },
+          text: 'Retry',
+        },
+      ]);
+    }, connectionDebugTimeoutMillis);
+
     (async () => {
-      if (location !== null) {
-        try {
-          setIsError(false);
-          setIsLoading(true);
-          const landmarks: LocalLandmark[] = (
-            await axios.get(baseUrl, {
-              params: { latitude: location.coords.latitude, longitude: location.coords.longitude },
-            })
-          ).data;
-          setUnreadLandmarks(landmarks);
-          // we need to trigger ready for next if this is the first time we are doing this
-          if (!currentLandmark) setIsReadyForNext(true);
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (e) {
+      try {
+        setIsError(false);
+        setIsLoading(true);
+        const landmarks: LocalLandmark[] = (
+          await axios.get(baseUrl, {
+            params: { latitude: location.coords.latitude, longitude: location.coords.longitude },
+            signal: controller.signal,
+          })
+        ).data;
+        didLoadLandmarks = true;
+        setUnreadLandmarks(landmarks);
+        // we need to trigger ready for next if this is the first time we are doing this
+        if (!currentLandmark) setIsReadyForNext(true);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (e) {
+        if (!axios.isCancel(e)) {
+          console.error(`Error loading landmarks from ${baseUrl}`, e);
           setErrorMsg('There was an error loading landmarks near you');
           setIsError(true);
         }
+      }
+      if (!controller.signal.aborted) {
         setIsLoading(false);
       }
     })().catch(console.error);
-  }, [location]);
+
+    return () => {
+      clearTimeout(timeout);
+      controller.abort();
+    };
+  }, [baseUrl, connectionDebugTimeoutMillis, location, requestRetryCount]);
 
   /**
    * Called when the isReadyForNext changed
