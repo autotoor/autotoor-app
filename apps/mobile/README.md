@@ -102,6 +102,8 @@ Rebuild and reinstall `autotoor-dev` after changing:
 
 ## Production builds
 
+Production builds resolve to `com.autotoor.tourapp`.
+
 Android store build:
 
 ```bash
@@ -114,7 +116,41 @@ iOS store build:
 APP_VARIANT=production eas build --profile production --platform ios
 ```
 
-Production builds resolve to `com.autotoor.tourapp`.
+The Android production profile builds an `.aab` app bundle for Play Console. EAS uses remote app versioning and `android.autoIncrement`, so each Android production build increments the Play Store `versionCode` automatically. This is required before uploading another build to any Play Console track.
+
+## Publish an Android test build
+
+Build a fresh production Android bundle from this directory:
+
+```bash
+cd /Users/alexlevine/dev/autotoor-app/apps/mobile
+nvm use
+APP_VARIANT=production eas build --profile production --platform android --wait
+```
+
+When the build finishes, download the `.aab` artifact from the EAS build URL. Rename it with the app version and versionCode if you want a clearer local filename, for example:
+
+```text
+autotoor-production-1.0.0-versionCode5.aab
+```
+
+Upload that `.aab` in Play Console to the desired testing track, such as Internal testing or Closed testing. If Play Console blocks the upload for a policy declaration, complete the required App content form first, then upload the same `.aab` again.
+
+## Submit to Play Console with EAS
+
+The production submit profile targets the production track as a draft release:
+
+```bash
+APP_VARIANT=production eas build --profile production --platform android --auto-submit --wait
+```
+
+To submit an already-built Android artifact by build id:
+
+```bash
+eas submit --platform android --id <eas-build-id> --profile production --wait
+```
+
+EAS submit requires a Google Play service account with access to `com.autotoor.tourapp`. The service account must have Play Console permissions for releases on the target app. Google Cloud IAM access alone is not enough.
 
 ## Useful local commands
 
