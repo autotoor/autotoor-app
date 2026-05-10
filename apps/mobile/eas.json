@@ -1,6 +1,7 @@
 {
   "cli": {
-    "promptToConfigurePushNotifications": false
+    "promptToConfigurePushNotifications": false,
+    "appVersionSource": "remote"
   },
   "build": {
     "monorepo": {
@@ -32,10 +33,19 @@
         "APP_VARIANT": "production"
       },
       "android": {
+        "autoIncrement": true,
         "buildType": "app-bundle"
       },
       "ios": {
         "resourceClass": "m1-medium"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "releaseStatus": "draft",
+        "track": "production"
       }
     }
   }
